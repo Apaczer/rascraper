@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import requests
 from urllib.parse import quote
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 
 # ---- SYSTEMS MAPPING ----
@@ -41,25 +41,33 @@ systems = {
         "libretro": "Sony_-_PlayStation",
         "muos": "Sony PlayStation"
     },
+    "PS2": {
+        "libretro": "Sony_-_PlayStation_2",
+        "muos": "Sony PlayStation 2"
+    },
+    "PS3": {
+        "libretro": "Sony_-_PlayStation_3",
+        "muos": "Sony PlayStation 3"
+    },
     "PSP": {
         "libretro": "Sony_-_PlayStation_Portable",
         "muos": "Sony PlayStation Portable"
     },
-    "SEGA Master System": {
-        "libretro": "Sega_-_Master_System_-_Mark_III",
-        "muos": "Sega Master System"
+    "PS Vita": {
+        "libretro": "Sony_-_PlayStation_Vita",
+        "muos": "Sony PlayStation Vita"
     },
     "SEGA SG-1000": {
         "libretro": "Sega_-_SG-1000",
         "muos": "Sega SG-1000"
     },
+    "SEGA Master System": {
+        "libretro": "Sega_-_Master_System_-_Mark_III",
+        "muos": "Sega Master System"
+    },
     "SEGA Mega Drive/Genesis": {
         "libretro": "Sega_-_Mega_Drive_-_Genesis",
         "muos": "Sega Mega Drive - Genesis"
-    },
-    "SEGA Dreamcast": {
-        "libretro": "Sega_-_Dreamcast",
-        "muos": "Sega Dreamcast"
     },
     "SEGA Game Gear": {
         "libretro": "Sega_-_Game_Gear",
@@ -76,6 +84,10 @@ systems = {
     "SEGA Saturn": {
         "libretro": "Sega_-_Saturn",
         "muos": "Sega Saturn"
+    },
+    "SEGA Dreamcast": {
+        "libretro": "Sega_-_Dreamcast",
+        "muos": "Sega Dreamcast"
     },
     "Atari 2600": {
         "libretro": "Atari_-_2600",
@@ -213,30 +225,12 @@ systems = {
         "libretro": "Nintendo_-_Wii",
         "muos": "Nintendo Wii"
     },
-    "PS2": {
-        "libretro": "Sony_-_PlayStation_2",
-        "muos": "Sony PlayStation 2"
-    },
-    "Sony PlayStation 3": {
-        "libretro": "Sony_-_PlayStation_3",
-        "muos": "Sony PlayStation 3"
-    },
-    "Sony PlayStation Vita": {
-        "libretro": "Sony_-_PlayStation_Vita",
-        "muos": "Sony PlayStation Vita"
-    },
 }
 
 extensions = ('.zip', '.7z', '.nes', '.sfc', '.smc', '.gba', '.gbc', '.gb', '.n64', '.z64', '.v64', '.bin', '.iso', '.chd', '.rom', '.mgw', '.nds', '.vb', '.p8', '.32x', '.sms', '.md', '.ngc', '.wsc', '.ws', '.dsk', '.tap', '.z80')
 
 libretro_replacements = {
-    "&": "_",
-    "(Rev 1)": "",
-    "(Rev 2)": "",
-    "(Rev 3)": "",
-    "(Rev 4)": "",
-    "(Rev 5)": "",
-    "(Rev 6)": "",
+    "&": "_", 
     "~": "_",
 }
 def normalize_libretro_filename(name):
@@ -244,12 +238,37 @@ def normalize_libretro_filename(name):
         name = name.replace(original, replacement)
     return name.strip()
 
+revs = {
+    "(Rev 1)": "",
+    "(Rev 2)": "",
+    "(Rev 3)": "",
+    "(Rev 4)": "",
+    "(Rev 5)": "",
+    "(Rev 6)": "",
+    "Rev A": "",
+    "Rev B": "",
+    "Rev C": "",
+}
+
+def no_rev_filename(name):
+    for original, replacement in revs.items():
+        name = name.replace(original, replacement)
+    return name
+
+def is_valid_image(data):
+    try:
+        with Image.open(BytesIO(data)) as img:
+            img.verify()
+        return True
+    except (UnidentifiedImageError, OSError):
+        return False
+
 # --- UTILS ___
 
 def get_latest_commit_hash(libretro_folder):
     api_url = f"https://api.github.com/repos/libretro-thumbnails/{libretro_folder}/commits"
     headers = {"Accept": "application/vnd.github+json"}
-    response = requests.get(api_url, headers=headers)
+    response = requests.get(api_url, headers=headers, timeout=10)
     if response.status_code == 200:
         return response.json()[0]["sha"]
     else:
@@ -259,7 +278,7 @@ def download_libretro_thumbnail(libretro_folder, art_type, rom_name, commit):
     filename = f"{rom_name}.png"
     encoded_filename = quote(filename, safe="")  # full encoding
     url = f"https://raw.githubusercontent.com/libretro-thumbnails/{libretro_folder}/{commit}/{art_type}/{encoded_filename}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     if response.status_code == 200:
         return response.content
     else:
@@ -275,8 +294,9 @@ def resize_image(image_bytes, width=300):
         img.save(output, format="PNG")
         return output.getvalue()
     except Exception as e:
-        print(f"✖ [ERROR] Failed to resize image: {e}")
+        print(f"✖ [ERROR] Failed to resize image: {e}") 
         return None
+    # TODO: replace print with logging or GUI status output
     
 def save_image(image_bytes, path):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -323,7 +343,15 @@ def run_scraper(roms_folder, system_key, output_mode, progress_callback=None, mu
         
         # Download boxart
         if not os.path.exists(boxart_path):
-            boxart_bytes = download_libretro_thumbnail(libretro_folder, "Named_Boxarts", normalized_name, commit)   
+            # Try download with normalized name
+            boxart_bytes = download_libretro_thumbnail(libretro_folder, "Named_Boxarts", normalized_name, commit)  
+            # Fallback: try without (Rev X) etc if 1st attempt failed
+            if not boxart_bytes or not is_valid_image(boxart_bytes):
+                fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
+                if fallback_name != normalized_name:
+                    boxart_bytes = download_libretro_thumbnail(
+                        libretro_folder, "Named_Boxarts", fallback_name, commit
+                    )        
             if boxart_bytes:
                 resized = resize_image(boxart_bytes, width=300)
                 if resized:
@@ -338,6 +366,12 @@ def run_scraper(roms_folder, system_key, output_mode, progress_callback=None, mu
         # Download screenshot
         if not os.path.exists(snap_path):
             snap_bytes = download_libretro_thumbnail(libretro_folder, "Named_Snaps", normalized_name, commit)
+            if not snap_bytes or not is_valid_image(snap_bytes):
+                fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
+                if fallback_name != normalized_name:
+                    snap_bytes = download_libretro_thumbnail(
+                        libretro_folder, "Named_Snaps", fallback_name, commit
+                    )
             if snap_bytes:
                 save_image(snap_bytes, snap_path)
             else:
