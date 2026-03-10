@@ -312,7 +312,7 @@ def get_rom_files(roms_folder, extensions):
     return roms
 
 # --- SCRAPER LOGIC ---
-def run_scraper(roms_folder, system_key, output_mode, progress_callback=None, muos_root=None):
+def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_callback=None, muos_root=None):
     libretro_folder = systems[system_key]["libretro"]
     muos_folder = systems[system_key]["muos"]
     commit = get_latest_commit_hash(libretro_folder)
@@ -321,11 +321,15 @@ def run_scraper(roms_folder, system_key, output_mode, progress_callback=None, mu
         if not muos_root:
             raise RuntimeError("No MUOS root folder selected.")
         base_output = os.path.join(muos_root, "info", "catalogue", muos_folder)
-        output_boxarts = os.path.join(base_output, "box")
-        output_snaps = os.path.join(base_output, "preview")
+        if scraper_mode == "boxarts":
+            output_boxarts = os.path.join(base_output, "box")
+        else:
+            output_snaps = os.path.join(base_output, "preview")
     else:
-        output_boxarts = os.path.join(roms_folder, "images", "Boxarts")
-        output_snaps = os.path.join(roms_folder, "images", "Screenshots")
+        if scraper_mode == "boxarts":
+            output_boxarts = os.path.join(roms_folder, "images", "Boxarts")
+        else:
+            output_snaps = os.path.join(roms_folder, "images", "Screenshots")
         
     rom_files = get_rom_files(roms_folder, extensions)
     total = len(rom_files)
@@ -337,47 +341,50 @@ def run_scraper(roms_folder, system_key, output_mode, progress_callback=None, mu
     for idx, rom in enumerate(rom_files, start=1):
         rom_name, _ = os.path.splitext(rom)
         normalized_name = normalize_libretro_filename(rom_name)
+        if scraper_mode == "boxarts":
+            boxart_path = os.path.join(output_boxarts, f"{rom_name}.png")
+        else:
+            snap_path = os.path.join(output_snaps, f"{rom_name}.png")
         
-        boxart_path = os.path.join(output_boxarts, f"{rom_name}.png")
-        snap_path = os.path.join(output_snaps, f"{rom_name}.png")
-        
+        # Scrap Art
+        if scraper_mode == "boxarts":
         # Download boxart
-        if not os.path.exists(boxart_path):
-            # Try download with normalized name
-            boxart_bytes = download_libretro_thumbnail(libretro_folder, "Named_Boxarts", normalized_name, commit)  
-            # Fallback: try without (Rev X) etc if 1st attempt failed
-            if not boxart_bytes or not is_valid_image(boxart_bytes):
-                fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
-                if fallback_name != normalized_name:
-                    boxart_bytes = download_libretro_thumbnail(
-                        libretro_folder, "Named_Boxarts", fallback_name, commit
-                    )        
-            if boxart_bytes:
-                resized = resize_image(boxart_bytes, width=300)
-                if resized:
-                    save_image(resized, boxart_path)
+            if not os.path.exists(boxart_path):
+                # Try download with normalized name
+                boxart_bytes = download_libretro_thumbnail(libretro_folder, "Named_Boxarts", normalized_name, commit)  
+                # Fallback: try without (Rev X) etc if 1st attempt failed
+                if not boxart_bytes or not is_valid_image(boxart_bytes):
+                    fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
+                    if fallback_name != normalized_name:
+                        boxart_bytes = download_libretro_thumbnail(
+                            libretro_folder, "Named_Boxarts", fallback_name, commit
+                        )        
+                if boxart_bytes:
+                    resized = resize_image(boxart_bytes, width=300)
+                    if resized:
+                        save_image(resized, boxart_path)
+                    else:
+                        failed.append(f"{rom_name} (Boxart - Resize Error)")
                 else:
-                    failed.append(f"{rom_name} (Boxart - Resize Error)")
+                    failed.append(f"{rom_name} (Boxart)")
             else:
-                failed.append(f"{rom_name} (Boxart)")
+                skipped.append(f"{rom_name} (Boxart)")
         else:
-            skipped.append(f"{rom_name} (Boxart)")
-        
-        # Download screenshot
-        if not os.path.exists(snap_path):
-            snap_bytes = download_libretro_thumbnail(libretro_folder, "Named_Snaps", normalized_name, commit)
-            if not snap_bytes or not is_valid_image(snap_bytes):
-                fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
-                if fallback_name != normalized_name:
-                    snap_bytes = download_libretro_thumbnail(
-                        libretro_folder, "Named_Snaps", fallback_name, commit
-                    )
-            if snap_bytes:
-                save_image(snap_bytes, snap_path)
+            # Download screenshot
+            if not os.path.exists(snap_path):
+                snap_bytes = download_libretro_thumbnail(libretro_folder, "Named_Snaps", normalized_name, commit)
+                if not snap_bytes or not is_valid_image(snap_bytes):
+                    fallback_name = normalize_libretro_filename(no_rev_filename(rom_name))
+                    if fallback_name != normalized_name:
+                        snap_bytes = download_libretro_thumbnail(
+                            libretro_folder, "Named_Snaps", fallback_name, commit
+                        )
+                if snap_bytes:
+                    save_image(snap_bytes, snap_path)
+                else:
+                    failed.append(f"{rom_name} (Screenshot)")
             else:
-                failed.append(f"{rom_name} (Screenshot)")
-        else:
-            skipped.append(f"{rom_name} (Screenshot)")
+                skipped.append(f"{rom_name} (Screenshot)")
         
         if progress_callback:
             progress_callback(idx, total)
@@ -389,13 +396,14 @@ class RAScraperGUI:
     def __init__(self, root):
         self.root = root
         root.title("RetroArch Scraper")
-        root.geometry("600x400")
+        root.geometry("640x480")
         
         # Variables
         self.roms_path = tk.StringVar()
         self.muos_root_path = tk.StringVar()
         self.selected_system = tk.StringVar()
         self.output_option = tk.StringVar(value="muos")
+        self.scraper_option = tk.StringVar(value="boxarts")
         self.progress = tk.IntVar(value=0)
         self.progress_text = tk.StringVar(value="")
         
@@ -425,6 +433,12 @@ class RAScraperGUI:
         output_frame.pack(fill="x", padx=20)
         tk.Radiobutton(output_frame, text="MUOS-compatible folder (MUOS/info/catalogue/{system})", variable=self.output_option, value="muos").pack(anchor="w")
         tk.Radiobutton(output_frame, text="Within root ROMs folder (/images/Boxarts & /images/Screenshots)", variable=self.output_option, value="roms").pack(anchor="w")
+
+        tk.Label(root, text="What type of artwork should be downloaded?").pack(anchor="w", padx=10, pady=(10,0))
+        output_frame = tk.Frame(root)
+        output_frame.pack(fill="x", padx=20)
+        tk.Radiobutton(output_frame, text="Boxarts", variable=self.scraper_option, value="boxarts").pack(anchor="w")
+        tk.Radiobutton(output_frame, text="Screenshots", variable=self.scraper_option, value="screenshots").pack(anchor="w")
         
         # Progress bar and label
         self.progress_bar = ttk.Progressbar(root, maximum=100, variable=self.progress)
@@ -455,6 +469,7 @@ class RAScraperGUI:
         muos_root = self.muos_root_path.get().strip()
         system_key = self.selected_system.get()
         output_mode = self.output_option.get()
+        scraper_mode = self.scraper_option.get()
         
         if not roms_folder:
             messagebox.showwarning("Missing input", "Please select a ROMs folder.")
@@ -470,7 +485,7 @@ class RAScraperGUI:
         
         def task():
             try:
-                failed, skipped = run_scraper(roms_folder, system_key, output_mode, self.update_progress, muos_root)
+                failed, skipped = run_scraper(roms_folder, system_key, output_mode, scraper_mode, self.update_progress, muos_root)
                 self.progress_text.set("Done!")
                 message = "Scraping complete!\n"
                 if skipped:
