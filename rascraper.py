@@ -11,199 +11,199 @@ from io import BytesIO
 systems = {
     "Nintendo": {
         "libretro": "Nintendo_-_Nintendo_Entertainment_System",
-        "miyoo": "Nintendo NES-Famicom"
+        "miyoo": "NES"
     },
     "Super Nintendo": {
         "libretro": "Nintendo_-_Super_Nintendo_Entertainment_System",
-        "miyoo": "Nintendo SNES-SFC"
+        "miyoo": "SNES"
     },
     "Nintendo 64": {
         "libretro": "Nintendo_-_Nintendo_64",
-        "miyoo": "Nintendo N64"
+        "miyoo": "NINTENDO_64"
     },
     "Game Boy": {
         "libretro": "Nintendo_-_Game_Boy",
-        "miyoo": "Nintendo Game Boy"
+        "miyoo": "GB"
     },
     "Game Boy Color": {
         "libretro": "Nintendo_-_Game_Boy_Color",
-        "miyoo": "Nintendo Game Boy Color"
+        "miyoo": "GBC"
     },
     "Game Boy Advance": {
         "libretro": "Nintendo_-_Game_Boy_Advance",
-        "miyoo": "Nintendo Game Boy Advance"
+        "miyoo": "GBA"
     },
     "Nintendo DS": {
         "libretro": "Nintendo_-_Nintendo_DS",
-        "miyoo": "Nintendo DS"
+        "miyoo": "NDS"
     },
     "PS1": {
         "libretro": "Sony_-_PlayStation",
-        "miyoo": "Sony PlayStation"
+        "miyoo": "PS1"
     },
     "PS2": {
         "libretro": "Sony_-_PlayStation_2",
-        "miyoo": "Sony PlayStation 2"
+        "miyoo": "PLAYSTATION2"
     },
     "PS3": {
         "libretro": "Sony_-_PlayStation_3",
-        "miyoo": "Sony PlayStation 3"
+        "miyoo": "PLAYSTATION3"
     },
     "PSP": {
         "libretro": "Sony_-_PlayStation_Portable",
-        "miyoo": "Sony PlayStation Portable"
+        "miyoo": "PLAYSTATION_PORTABLE"
     },
     "PS Vita": {
         "libretro": "Sony_-_PlayStation_Vita",
-        "miyoo": "Sony PlayStation Vita"
+        "miyoo": "PLAYSTATION_VITA"
     },
     "SEGA SG-1000": {
         "libretro": "Sega_-_SG-1000",
-        "miyoo": "Sega SG-1000"
+        "miyoo": "SG1000"
     },
     "SEGA Master System": {
         "libretro": "Sega_-_Master_System_-_Mark_III",
-        "miyoo": "Sega Master System"
+        "miyoo": "SMS"
     },
     "SEGA Mega Drive/Genesis": {
         "libretro": "Sega_-_Mega_Drive_-_Genesis",
-        "miyoo": "Sega Mega Drive - Genesis"
+        "miyoo": "SMD"
     },
     "SEGA Game Gear": {
         "libretro": "Sega_-_Game_Gear",
-        "miyoo": "Sega Game Gear"
+        "miyoo": "GG"
     },
     "SEGA CD": {
         "libretro": "Sega_-_Mega-CD_-_Sega_CD",
-        "miyoo": "Sega Mega CD - Sega CD"
+        "miyoo": "SMDCD"
     },
     "SEGA 32X": {
         "libretro": "Sega_-_32X",
-        "miyoo": "Sega 32X"
+        "miyoo": "SMD32X"
     },
     "SEGA Saturn": {
         "libretro": "Sega_-_Saturn",
-        "miyoo": "Sega Saturn"
+        "miyoo": "SEGA_SATURN"
     },
     "SEGA Dreamcast": {
         "libretro": "Sega_-_Dreamcast",
-        "miyoo": "Sega Dreamcast"
+        "miyoo": "DREAMCAST"
     },
     "Atari 2600": {
         "libretro": "Atari_-_2600",
-        "miyoo": "Atari 2600"
+        "miyoo": "ATARI_2600"
     },
     "Atari 5200": {
         "libretro": "Atari_-_5200",
-        "miyoo": "Atari 5200"
+        "miyoo": "ATARI_5200"
     },
     "Atari 7800": {
         "libretro": "Atari_-_7800",
-        "miyoo": "Atari 7800"
+        "miyoo": "ATARI_7800"
     },
     "Atari Jaguar": {
         "libretro": "Atari_-_Jaguar",
-        "miyoo": "Atari Jaguar"
+        "miyoo": "ATARI_JAGUAR"
     },
     "Atari Lynx": {
         "libretro": "Atari_-_Lynx",
-        "miyoo": "Atari Lynx"
+        "miyoo": "LYNX"
     },
     "Atari ST": {
         "libretro": "Atari_-_ST",
-        "miyoo": "Atari ST-STE-TT-Falcon"
+        "miyoo": "ATARI_ST"
     },
     "Magnavox - Odyssey2": {
         "libretro": "Magnavox_-_Odyssey2",
-        "miyoo": "Odyssey2 - VideoPac"
+        "miyoo": "ODYSSEY2"
     },
     "Bandai WonderSwan": {
         "libretro": "Bandai_-_WonderSwan",
-        "miyoo": "Bandai WonderSwan-Color"
+        "miyoo": "WSWAN"
     },
     "Bandai WonderSwan Color": {
         "libretro": "Bandai_-_WonderSwan_Color",
-        "miyoo": "Bandai WonderSwan-Color"
+        "miyoo": "WSWAN_COLOR"
     },
     "NEC PC Engine": {
         "libretro": "NEC_-_PC_Engine_-_TurboGrafx_16",
-        "miyoo": "NEC PC Engine"
+        "miyoo": "PCE"
     },
     "NEC PC Engine CD": {
         "libretro": "NEC_-_PC_Engine_-_TurboGrafx_CD",
-        "miyoo": "NEC PC Engine CD"
+        "miyoo": "PCE"
     },
     "NEC PC Engine SuperGrafx": {
         "libretro": "NEC_-_PC_Engine_SuperGrafx",
-        "miyoo": "NEC PC Engine SuperGrafx"
+        "miyoo": "PCE"
     },
     "3DO": {
         "libretro": "The_3DO_Company_-_3DO",
-        "miyoo": "The 3DO Company - 3DO"
+        "miyoo": "3DO"
     },  
     "Philips CD-i": {
         "libretro": "Philips_-_CD-i",
-        "miyoo": "Philips CDi"
+        "miyoo": "CDI2015"
     },
     "MSX": {
         "libretro": "Microsoft_-_MSX",
-        "miyoo": "Microsoft - MSX"
+        "miyoo": "MSX"
     },
     "MSX2": {
         "libretro": "Microsoft_-_MSX2",
-        "miyoo": "Microsoft - MSX"
+        "miyoo": "MSX"
     },
     "FBNeo - Arcade": {
         "libretro": "FBNeo_-_Arcade_Games",
-        "miyoo": "Arcade"
+        "miyoo": "FBA"
     },
     "MAME - Arcade": {
         "libretro": "MAME",
-        "miyoo": "Arcade"
+        "miyoo": "MAME"
     },
     "Atomiswave": {
         "libretro": "Atomiswave",
-        "miyoo": "Sega Atomiswave Naomi"
+        "miyoo": "ATOMISWAVE"
     },
     "SEGA Naomi": {
         "libretro": "Sega_-_Naomi",
-        "miyoo": "Sega Atomiswave Naomi"
+        "miyoo": "ATOMISWAVE"
     },
     "SNK Neo Geo": {
         "libretro": "SNK_-_Neo_Geo",
-        "miyoo": "SNK Neo Geo"
+        "miyoo": "NEOGEO"
     },
     "SNK Neo Geo CD": {
         "libretro": "SNK_-_Neo_Geo_CD",
-        "miyoo": "SNK Neo Geo CD"
+        "miyoo": "NEOGEO"
     },
     "SNK Neo Geo Pocket": {
         "libretro": "SNK_-_Neo_Geo_Pocket",
-        "miyoo": "SNK Neo Geo Pocket - Color"
+        "miyoo": "NGP"
     },
     "SNK Neo Geo Pocket Color": {
         "libretro": "SNK_-_Neo_Geo_Pocket_Color",
-        "miyoo": "SNK Neo Geo Pocket - Color"
+        "miyoo": "NGP"
     },
     "ColecoVision": {
         "libretro": "Coleco_-_ColecoVision",
-        "miyoo": "ColecoVision"
+        "miyoo": "COLECOVISION"
     },
     "Amstrad CPC": {
         "libretro": "Amstrad_-_CPC",
-        "miyoo": "Amstrad"
+        "miyoo": "CPC"
     },
     "Commodore 64": {
         "libretro": "Commodore_-_64",
-        "miyoo": "Commodore C64"
+        "miyoo": "C64"
     },
     "Commodore Amiga": {
         "libretro": "Commodore_-_Amiga",
-        "miyoo": "Commodore Amiga"
+        "miyoo": "AMIGA"
     },
     "ZX Spectrum": {
         "libretro": "Sinclair_-_ZX_Spectrum",
-        "miyoo": "Sinclair ZX Spectrum"
+        "miyoo": "Z80"
     },
     "DOS": {
         "libretro": "DOS",
@@ -211,19 +211,19 @@ systems = {
     },
     "Game and Watch": {
         "libretro": "Handheld_Electronic_Game",
-        "miyoo": "Handheld Electronic - Game and Watch"
+        "miyoo": "G&W"
     },
     "Virtual Boy": {
         "libretro": "Nintendo_-_Virtual_Boy",
-        "miyoo": "Nintendo Virtual Boy"
+        "miyoo": "VIRTUAL_BOY"
     },
     "Nintendo GameCube": {
         "libretro": "Nintendo_-_GameCube",
-        "miyoo": "Nintendo GameCube"
+        "miyoo": "GAMECUBE"
     },
     "Nintendo Wii": {
         "libretro": "Nintendo_-_Wii",
-        "miyoo": "Nintendo Wii"
+        "miyoo": "WII"
     },
 }
 
