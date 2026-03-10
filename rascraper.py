@@ -354,7 +354,7 @@ def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_cal
                             libretro_folder, "Named_Boxarts", fallback_name, commit
                         )        
                 if boxart_bytes:
-                    resized = resize_image(boxart_bytes, width=300)
+                    resized = resize_image(boxart_bytes)
                     if resized:
                         save_image(resized, boxart_path)
                     else:
