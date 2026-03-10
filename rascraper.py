@@ -284,7 +284,7 @@ def download_libretro_thumbnail(libretro_folder, art_type, rom_name, commit):
     else:
         return None
     
-def resize_image(image_bytes, width=300):
+def resize_image(image_bytes, width=128):
     try:
         img = Image.open(BytesIO(image_bytes))
         w_percent = width / float(img.size[0])
