@@ -11,219 +11,219 @@ from io import BytesIO
 systems = {
     "Nintendo": {
         "libretro": "Nintendo_-_Nintendo_Entertainment_System",
-        "muos": "Nintendo NES-Famicom"
+        "miyoo": "Nintendo NES-Famicom"
     },
     "Super Nintendo": {
         "libretro": "Nintendo_-_Super_Nintendo_Entertainment_System",
-        "muos": "Nintendo SNES-SFC"
+        "miyoo": "Nintendo SNES-SFC"
     },
     "Nintendo 64": {
         "libretro": "Nintendo_-_Nintendo_64",
-        "muos": "Nintendo N64"
+        "miyoo": "Nintendo N64"
     },
     "Game Boy": {
         "libretro": "Nintendo_-_Game_Boy",
-        "muos": "Nintendo Game Boy"
+        "miyoo": "Nintendo Game Boy"
     },
     "Game Boy Color": {
         "libretro": "Nintendo_-_Game_Boy_Color",
-        "muos": "Nintendo Game Boy Color"
+        "miyoo": "Nintendo Game Boy Color"
     },
     "Game Boy Advance": {
         "libretro": "Nintendo_-_Game_Boy_Advance",
-        "muos": "Nintendo Game Boy Advance"
+        "miyoo": "Nintendo Game Boy Advance"
     },
     "Nintendo DS": {
         "libretro": "Nintendo_-_Nintendo_DS",
-        "muos": "Nintendo DS"
+        "miyoo": "Nintendo DS"
     },
     "PS1": {
         "libretro": "Sony_-_PlayStation",
-        "muos": "Sony PlayStation"
+        "miyoo": "Sony PlayStation"
     },
     "PS2": {
         "libretro": "Sony_-_PlayStation_2",
-        "muos": "Sony PlayStation 2"
+        "miyoo": "Sony PlayStation 2"
     },
     "PS3": {
         "libretro": "Sony_-_PlayStation_3",
-        "muos": "Sony PlayStation 3"
+        "miyoo": "Sony PlayStation 3"
     },
     "PSP": {
         "libretro": "Sony_-_PlayStation_Portable",
-        "muos": "Sony PlayStation Portable"
+        "miyoo": "Sony PlayStation Portable"
     },
     "PS Vita": {
         "libretro": "Sony_-_PlayStation_Vita",
-        "muos": "Sony PlayStation Vita"
+        "miyoo": "Sony PlayStation Vita"
     },
     "SEGA SG-1000": {
         "libretro": "Sega_-_SG-1000",
-        "muos": "Sega SG-1000"
+        "miyoo": "Sega SG-1000"
     },
     "SEGA Master System": {
         "libretro": "Sega_-_Master_System_-_Mark_III",
-        "muos": "Sega Master System"
+        "miyoo": "Sega Master System"
     },
     "SEGA Mega Drive/Genesis": {
         "libretro": "Sega_-_Mega_Drive_-_Genesis",
-        "muos": "Sega Mega Drive - Genesis"
+        "miyoo": "Sega Mega Drive - Genesis"
     },
     "SEGA Game Gear": {
         "libretro": "Sega_-_Game_Gear",
-        "muos": "Sega Game Gear"
+        "miyoo": "Sega Game Gear"
     },
     "SEGA CD": {
         "libretro": "Sega_-_Mega-CD_-_Sega_CD",
-        "muos": "Sega Mega CD - Sega CD"
+        "miyoo": "Sega Mega CD - Sega CD"
     },
     "SEGA 32X": {
         "libretro": "Sega_-_32X",
-        "muos": "Sega 32X"
+        "miyoo": "Sega 32X"
     },
     "SEGA Saturn": {
         "libretro": "Sega_-_Saturn",
-        "muos": "Sega Saturn"
+        "miyoo": "Sega Saturn"
     },
     "SEGA Dreamcast": {
         "libretro": "Sega_-_Dreamcast",
-        "muos": "Sega Dreamcast"
+        "miyoo": "Sega Dreamcast"
     },
     "Atari 2600": {
         "libretro": "Atari_-_2600",
-        "muos": "Atari 2600"
+        "miyoo": "Atari 2600"
     },
     "Atari 5200": {
         "libretro": "Atari_-_5200",
-        "muos": "Atari 5200"
+        "miyoo": "Atari 5200"
     },
     "Atari 7800": {
         "libretro": "Atari_-_7800",
-        "muos": "Atari 7800"
+        "miyoo": "Atari 7800"
     },
     "Atari Jaguar": {
         "libretro": "Atari_-_Jaguar",
-        "muos": "Atari Jaguar"
+        "miyoo": "Atari Jaguar"
     },
     "Atari Lynx": {
         "libretro": "Atari_-_Lynx",
-        "muos": "Atari Lynx"
+        "miyoo": "Atari Lynx"
     },
     "Atari ST": {
         "libretro": "Atari_-_ST",
-        "muos": "Atari ST-STE-TT-Falcon"
+        "miyoo": "Atari ST-STE-TT-Falcon"
     },
     "Magnavox - Odyssey2": {
         "libretro": "Magnavox_-_Odyssey2",
-        "muos": "Odyssey2 - VideoPac"
+        "miyoo": "Odyssey2 - VideoPac"
     },
     "Bandai WonderSwan": {
         "libretro": "Bandai_-_WonderSwan",
-        "muos": "Bandai WonderSwan-Color"
+        "miyoo": "Bandai WonderSwan-Color"
     },
     "Bandai WonderSwan Color": {
         "libretro": "Bandai_-_WonderSwan_Color",
-        "muos": "Bandai WonderSwan-Color"
+        "miyoo": "Bandai WonderSwan-Color"
     },
     "NEC PC Engine": {
         "libretro": "NEC_-_PC_Engine_-_TurboGrafx_16",
-        "muos": "NEC PC Engine"
+        "miyoo": "NEC PC Engine"
     },
     "NEC PC Engine CD": {
         "libretro": "NEC_-_PC_Engine_-_TurboGrafx_CD",
-        "muos": "NEC PC Engine CD"
+        "miyoo": "NEC PC Engine CD"
     },
     "NEC PC Engine SuperGrafx": {
         "libretro": "NEC_-_PC_Engine_SuperGrafx",
-        "muos": "NEC PC Engine SuperGrafx"
+        "miyoo": "NEC PC Engine SuperGrafx"
     },
     "3DO": {
         "libretro": "The_3DO_Company_-_3DO",
-        "muos": "The 3DO Company - 3DO"
+        "miyoo": "The 3DO Company - 3DO"
     },  
     "Philips CD-i": {
         "libretro": "Philips_-_CD-i",
-        "muos": "Philips CDi"
+        "miyoo": "Philips CDi"
     },
     "MSX": {
         "libretro": "Microsoft_-_MSX",
-        "muos": "Microsoft - MSX"
+        "miyoo": "Microsoft - MSX"
     },
     "MSX2": {
         "libretro": "Microsoft_-_MSX2",
-        "muos": "Microsoft - MSX"
+        "miyoo": "Microsoft - MSX"
     },
     "FBNeo - Arcade": {
         "libretro": "FBNeo_-_Arcade_Games",
-        "muos": "Arcade"
+        "miyoo": "Arcade"
     },
     "MAME - Arcade": {
         "libretro": "MAME",
-        "muos": "Arcade"
+        "miyoo": "Arcade"
     },
     "Atomiswave": {
         "libretro": "Atomiswave",
-        "muos": "Sega Atomiswave Naomi"
+        "miyoo": "Sega Atomiswave Naomi"
     },
     "SEGA Naomi": {
         "libretro": "Sega_-_Naomi",
-        "muos": "Sega Atomiswave Naomi"
+        "miyoo": "Sega Atomiswave Naomi"
     },
     "SNK Neo Geo": {
         "libretro": "SNK_-_Neo_Geo",
-        "muos": "SNK Neo Geo"
+        "miyoo": "SNK Neo Geo"
     },
     "SNK Neo Geo CD": {
         "libretro": "SNK_-_Neo_Geo_CD",
-        "muos": "SNK Neo Geo CD"
+        "miyoo": "SNK Neo Geo CD"
     },
     "SNK Neo Geo Pocket": {
         "libretro": "SNK_-_Neo_Geo_Pocket",
-        "muos": "SNK Neo Geo Pocket - Color"
+        "miyoo": "SNK Neo Geo Pocket - Color"
     },
     "SNK Neo Geo Pocket Color": {
         "libretro": "SNK_-_Neo_Geo_Pocket_Color",
-        "muos": "SNK Neo Geo Pocket - Color"
+        "miyoo": "SNK Neo Geo Pocket - Color"
     },
     "ColecoVision": {
         "libretro": "Coleco_-_ColecoVision",
-        "muos": "ColecoVision"
+        "miyoo": "ColecoVision"
     },
     "Amstrad CPC": {
         "libretro": "Amstrad_-_CPC",
-        "muos": "Amstrad"
+        "miyoo": "Amstrad"
     },
     "Commodore 64": {
         "libretro": "Commodore_-_64",
-        "muos": "Commodore C64"
+        "miyoo": "Commodore C64"
     },
     "Commodore Amiga": {
         "libretro": "Commodore_-_Amiga",
-        "muos": "Commodore Amiga"
+        "miyoo": "Commodore Amiga"
     },
     "ZX Spectrum": {
         "libretro": "Sinclair_-_ZX_Spectrum",
-        "muos": "Sinclair ZX Spectrum"
+        "miyoo": "Sinclair ZX Spectrum"
     },
     "DOS": {
         "libretro": "DOS",
-        "muos": "DOS"
+        "miyoo": "DOS"
     },
     "Game and Watch": {
         "libretro": "Handheld_Electronic_Game",
-        "muos": "Handheld Electronic - Game and Watch"
+        "miyoo": "Handheld Electronic - Game and Watch"
     },
     "Virtual Boy": {
         "libretro": "Nintendo_-_Virtual_Boy",
-        "muos": "Nintendo Virtual Boy"
+        "miyoo": "Nintendo Virtual Boy"
     },
     "Nintendo GameCube": {
         "libretro": "Nintendo_-_GameCube",
-        "muos": "Nintendo GameCube"
+        "miyoo": "Nintendo GameCube"
     },
     "Nintendo Wii": {
         "libretro": "Nintendo_-_Wii",
-        "muos": "Nintendo Wii"
+        "miyoo": "Nintendo Wii"
     },
 }
 
@@ -312,15 +312,15 @@ def get_rom_files(roms_folder, extensions):
     return roms
 
 # --- SCRAPER LOGIC ---
-def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_callback=None, muos_root=None):
+def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_callback=None, miyoo_root=None):
     libretro_folder = systems[system_key]["libretro"]
-    muos_folder = systems[system_key]["muos"]
+    miyoo_folder = systems[system_key]["miyoo"]
     commit = get_latest_commit_hash(libretro_folder)
     
-    if output_mode == "muos":
-        if not muos_root:
-            raise RuntimeError("No MUOS root folder selected.")
-        base_output = os.path.join(muos_root, "info", "catalogue", muos_folder)
+    if output_mode == "miyoo":
+        if not miyoo_root:
+            raise RuntimeError("No MIYOO root folder selected.")
+        base_output = os.path.join(miyoo_root, "info", "catalogue", miyoo_folder)
         if scraper_mode == "boxarts":
             output_boxarts = os.path.join(base_output, "box")
         else:
@@ -400,9 +400,9 @@ class RAScraperGUI:
         
         # Variables
         self.roms_path = tk.StringVar()
-        self.muos_root_path = tk.StringVar()
+        self.miyoo_root_path = tk.StringVar()
         self.selected_system = tk.StringVar()
-        self.output_option = tk.StringVar(value="muos")
+        self.output_option = tk.StringVar(value="miyoo")
         self.scraper_option = tk.StringVar(value="boxarts")
         self.progress = tk.IntVar(value=0)
         self.progress_text = tk.StringVar(value="")
@@ -414,12 +414,12 @@ class RAScraperGUI:
         tk.Entry(rom_frame, textvariable=self.roms_path).pack(side="left", fill="x", expand=True)
         tk.Button(rom_frame, text="Browse", command=self.browse_roms).pack(side="right")
         
-        # MUOS root folder
-        tk.Label(root, text="MUOS Root Folder (only needed if MUOS output selected):").pack(anchor="w", padx=10, pady=(10,0))
-        muos_frame = tk.Frame(root)
-        muos_frame.pack(fill="x", padx=10)
-        tk.Entry(muos_frame, textvariable=self.muos_root_path).pack(side="left", fill="x", expand=True)
-        tk.Button(muos_frame, text="Browse", command=self.browse_muos).pack(side="right")
+        # MIYOO root folder
+        tk.Label(root, text="MIYOO Root Folder (only needed if MIYOO output selected):").pack(anchor="w", padx=10, pady=(10,0))
+        miyoo_frame = tk.Frame(root)
+        miyoo_frame.pack(fill="x", padx=10)
+        tk.Entry(miyoo_frame, textvariable=self.miyoo_root_path).pack(side="left", fill="x", expand=True)
+        tk.Button(miyoo_frame, text="Browse", command=self.browse_miyoo).pack(side="right")
         
         # System dropdown
         tk.Label(root, text="Select System:").pack(anchor="w", padx=10, pady=(10,0))
@@ -431,7 +431,7 @@ class RAScraperGUI:
         tk.Label(root, text="Where should artwork be saved?").pack(anchor="w", padx=10, pady=(10,0))
         output_frame = tk.Frame(root)
         output_frame.pack(fill="x", padx=20)
-        tk.Radiobutton(output_frame, text="MUOS-compatible folder (MUOS/info/catalogue/{system})", variable=self.output_option, value="muos").pack(anchor="w")
+        tk.Radiobutton(output_frame, text="MIYOO-compatible folder (MIYOO/info/catalogue/{system})", variable=self.output_option, value="miyoo").pack(anchor="w")
         tk.Radiobutton(output_frame, text="Within root ROMs folder (/images/Boxarts & /images/Screenshots)", variable=self.output_option, value="roms").pack(anchor="w")
 
         tk.Label(root, text="What type of artwork should be downloaded?").pack(anchor="w", padx=10, pady=(10,0))
@@ -454,10 +454,10 @@ class RAScraperGUI:
         if path:
             self.roms_path.set(path)
             
-    def browse_muos(self):
+    def browse_miyoo(self):
         path = filedialog.askdirectory()
         if path:
-            self.muos_root_path.set(path)
+            self.miyoo_root_path.set(path)
             
     def update_progress(self, current, total):
         percent = int((current / total) * 100)
@@ -466,7 +466,7 @@ class RAScraperGUI:
         
     def run_scraper_thread(self):
         roms_folder = self.roms_path.get().strip()
-        muos_root = self.muos_root_path.get().strip()
+        miyoo_root = self.miyoo_root_path.get().strip()
         system_key = self.selected_system.get()
         output_mode = self.output_option.get()
         scraper_mode = self.scraper_option.get()
@@ -475,8 +475,8 @@ class RAScraperGUI:
             messagebox.showwarning("Missing input", "Please select a ROMs folder.")
             return
         
-        if output_mode == "muos" and not muos_root:
-            messagebox.showwarning("Missing input", "Please select your MUOS root folder.")
+        if output_mode == "miyoo" and not miyoo_root:
+            messagebox.showwarning("Missing input", "Please select your MIYOO root folder.")
             return
         
         self.btn_run.config(state="disabled")
@@ -485,7 +485,7 @@ class RAScraperGUI:
         
         def task():
             try:
-                failed, skipped = run_scraper(roms_folder, system_key, output_mode, scraper_mode, self.update_progress, muos_root)
+                failed, skipped = run_scraper(roms_folder, system_key, output_mode, scraper_mode, self.update_progress, miyoo_root)
                 self.progress_text.set("Done!")
                 message = "Scraping complete!\n"
                 if skipped:
