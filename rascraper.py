@@ -320,7 +320,7 @@ def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_cal
     if output_mode == "miyoo":
         if not miyoo_root:
             raise RuntimeError("No MIYOO root folder selected.")
-        base_output = os.path.join(miyoo_root, "info", "catalogue", miyoo_folder)
+        base_output = os.path.join(miyoo_root, miyoo_folder)
         output_boxarts = output_snaps = os.path.join(base_output, ".images")
     else:
         output_boxarts = output_snaps = os.path.join(roms_folder, ".images")
