@@ -1,0 +1,44 @@
+
+name: CI Release Build
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+      - '*.txt'
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - '*.txt'
+
+jobs:
+  release-windows:
+    name: Build Windows
+    runs-on: windows-2025
+    steps:
+    - uses: actions/checkout@v6
+    - name: build EXE release
+      run: |
+        winget install python3
+        python3 -m pip install -r requirements.txt pyinstaller
+        python3 -m PyInstaller --onefile --noconsole rascraper.py
+    - uses: actions/upload-artifact@v7
+      with:
+        name: Windows rascraper.exe binary
+        path: dist/rascraper.exe
+        if-no-files-found: error # 'error', 'warn', 'ignore'; defaults to `warn`
+  release-ubuntu:
+    name: Build Ubuntu
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v6
+    - name: build PKG release
+      run: |
+        sudo apt-get update && sudo apt-get install -y python3-dev python3-pip
+        python3 -m pip install -r requirements.txt pyinstaller
+        python3 -m PyInstaller --onefile --noconsole rascraper.py
+    - uses: actions/upload-artifact@v7
+      with:
+        name: Ubuntu rascraper binary
+        path: dist/rascraper
+        if-no-files-found: error # 'error', 'warn', 'ignore'; defaults to `warn`
