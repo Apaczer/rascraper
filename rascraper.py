@@ -425,8 +425,8 @@ class RAScraperGUI:
         tk.Label(root, text="Where should artwork be saved?").pack(anchor="w", padx=10, pady=(10,0))
         output_frame = tk.Frame(root)
         output_frame.pack(fill="x", padx=20)
-        tk.Radiobutton(output_frame, text="MIYOO-compatible folder (MIYOO/info/catalogue/{system})", variable=self.output_option, value="miyoo").pack(anchor="w")
-        tk.Radiobutton(output_frame, text="Within root ROMs folder (/images/Boxarts & /images/Screenshots)", variable=self.output_option, value="roms").pack(anchor="w")
+        tk.Radiobutton(output_frame, text="MIYOO-compatible roms folder (MIYOO/{system}/.images)", variable=self.output_option, value="miyoo").pack(anchor="w")
+        tk.Radiobutton(output_frame, text="Within root ROMs folder (/.images)", variable=self.output_option, value="roms").pack(anchor="w")
 
         tk.Label(root, text="What type of artwork should be downloaded?").pack(anchor="w", padx=10, pady=(10,0))
         output_frame = tk.Frame(root)

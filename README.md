@@ -59,8 +59,10 @@ python3 rascraper.py
  - Select the **system** from the drop-down menu. This will map to the correct libretro-thumbnails directory and MIYOO `/roms/{system}` directory.
 
  - Choose your **output location** using the radio buttons:
-   - **MIYOO structure**: Saves artwork directly to `MIYOO/roms/{system}/.images` directory.
-   - **ROMs directory**: Creates an `images` directory with `Boxarts` OR `Screenshots` subdirectories in the ROMs directory.
+   - **MIYOO structure**: Saves artwork directly to `MIYOO/{system}/.images` directory (recommended to insert SD card and specify /roms partition).
+   - **ROMs directory**: Creates an `.images` directory with `Boxarts` OR `Screenshots` arts in the ROMs/{systen} directory 
+  
+    NOTE: If you want to copy ROMs and scraped images simultaneously from one place to your device, save artwork "Within root ROMS folder" & you can leave blank "MIYOO Root folder".
 
  - Click **RUN SCRAPER**.
 
