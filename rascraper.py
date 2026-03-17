@@ -9,6 +9,18 @@ from io import BytesIO
 
 # ---- SYSTEMS MAPPING ----
 systems = {
+    "ARCADE - FBNeo": {
+        "libretro": "FBNeo_-_Arcade_Games",
+        "miyoo": "FBA"
+    },
+    "ARCADE - MAME": {
+        "libretro": "MAME",
+        "miyoo": "MAME"
+    },
+    "ARCADE - SNK NeoGeo": {
+        "libretro": "SNK_-_Neo_Geo",
+        "miyoo": "NEOGEO"
+    },
     "Amstrad CPC": {
         "libretro": "Amstrad_-_CPC",
         "miyoo": "CPC"
@@ -119,10 +131,6 @@ systems = {
         "libretro": "Fairchild_-_Channel_F",
         "miyoo": "CHANNELF"
     },
-    "FBNeo - Arcade": {
-        "libretro": "FBNeo_-_Arcade_Games",
-        "miyoo": "FBA"
-    },
     "Flashback": {
         "libretro": "Flashback",
         "miyoo": "FLASHBACK"
@@ -162,10 +170,6 @@ systems = {
     "Lutro": {
         "libretro": "Lutro",
         "miyoo": "LUTRO"
-    },
-    "MAME - Arcade": {
-        "libretro": "MAME",
-        "miyoo": "MAME"
     },
     "Magnavox - Odyssey2": {
         "libretro": "Magnavox_-_Odyssey2",
@@ -355,10 +359,6 @@ systems = {
     "Sinclair ZX 81": {
         "libretro": "Sinclair_-_ZX_81",
         "miyoo": "ZX81"
-    },
-    "SNK Neo Geo": {
-        "libretro": "SNK_-_Neo_Geo",
-        "miyoo": "NEOGEO"
     },
     # "SNK Neo Geo CD": {
     #     "libretro": "SNK_-_Neo_Geo_CD",
