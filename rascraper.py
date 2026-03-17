@@ -35,23 +35,23 @@ systems = {
     },
     "Atari 8-bit": {
         "libretro": "Atari_-_8-bit_Family",
-        "miyoo": "ATARI_5200"
+        "miyoo": "800" # The systemid in RA suggest atari_5200, but it's atari800 core so let's use that
     },
     "Atari 2600": {
         "libretro": "Atari_-_2600",
-        "miyoo": "ATARI_2600"
+        "miyoo": "2600" # Would rather use smth like ATARI_2600,  but this isn't inline with legacy docs
     },
     "Atari 5200": {
         "libretro": "Atari_-_5200",
-        "miyoo": "ATARI_5200"
+        "miyoo": "5200"
     },
     "Atari 7800": {
         "libretro": "Atari_-_7800",
-        "miyoo": "ATARI_7800"
+        "miyoo": "7800"
     },
     # "Atari Jaguar": {
     #     "libretro": "Atari_-_Jaguar",
-    #     "miyoo": "ATARI_JAGUAR"
+    #     "miyoo": "JAGUAR"
     # },
     "Atari Lynx": {
         "libretro": "Atari_-_Lynx",
@@ -59,7 +59,7 @@ systems = {
     },
     "Atari ST": {
         "libretro": "Atari_-_ST",
-        "miyoo": "ATARI_ST"
+        "miyoo": "ST"
     },
     # "Atomiswave": {
     #     "libretro": "Atomiswave",
@@ -71,7 +71,7 @@ systems = {
     },
     "Bandai WonderSwan Color": {
         "libretro": "Bandai_-_WonderSwan_Color",
-        "miyoo": "WSWAN_COLOR"
+        "miyoo": "WSWAN"
     },
     # "CHIP-8": {
     #     "libretro": "",
@@ -150,7 +150,7 @@ systems = {
     },
     "Game Boy Color": {
         "libretro": "Nintendo_-_Game_Boy_Color",
-        "miyoo": "GBC"
+        "miyoo": "GB" # This is inline with wiki, so the same dir for GB & GBC, since similar emulators are used
     },
     "Game Boy Advance": {
         "libretro": "Nintendo_-_Game_Boy_Advance",
@@ -309,7 +309,7 @@ systems = {
     },
     "SEGA SG-1000": {
         "libretro": "Sega_-_SG-1000",
-        "miyoo": "SG1000"
+        "miyoo": "SMS" # There isn't any specifc emu for SG-1000, and they use SMS for most-used case
     },
     "SEGA Master System": {
         "libretro": "Sega_-_Master_System_-_Mark_III",
@@ -321,15 +321,15 @@ systems = {
     },
     "SEGA Game Gear": {
         "libretro": "Sega_-_Game_Gear",
-        "miyoo": "GG"
+        "miyoo": "SMS" # This is inline with wiki, so the same dir for SMS & GG
     },
     "SEGA CD": {
         "libretro": "Sega_-_Mega-CD_-_Sega_CD",
-        "miyoo": "SMDCD"
+        "miyoo": "SMD"
     },
     "SEGA 32X": {
         "libretro": "Sega_-_32X",
-        "miyoo": "SMD32X"
+        "miyoo": "SMD"
     },
     "SEGA PICO": {
         "libretro": "SEGA_-_PICO",
