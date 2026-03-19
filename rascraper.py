@@ -311,6 +311,10 @@ systems = {
         "libretro": "Sega_-_SG-1000",
         "miyoo": "SMS" # There isn't any specifc emu for SG-1000, and they use SMS for most-used case
     },
+    "SEGA Game Gear": {
+        "libretro": "Sega_-_Game_Gear",
+        "miyoo": "SMS" # This is inline with wiki, so the same dir for SMS & GG
+    },
     "SEGA Master System": {
         "libretro": "Sega_-_Master_System_-_Mark_III",
         "miyoo": "SMS"
@@ -318,10 +322,6 @@ systems = {
     "SEGA Mega Drive/Genesis": {
         "libretro": "Sega_-_Mega_Drive_-_Genesis",
         "miyoo": "SMD"
-    },
-    "SEGA Game Gear": {
-        "libretro": "Sega_-_Game_Gear",
-        "miyoo": "SMS" # This is inline with wiki, so the same dir for SMS & GG
     },
     "SEGA CD": {
         "libretro": "Sega_-_Mega-CD_-_Sega_CD",
