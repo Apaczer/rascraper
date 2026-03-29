@@ -1,6 +1,6 @@
 # RetroArch Scraper (MiyooCFW)
 
-YET another fork of https://github.com/mattsteen14/rascraper tailored to work with MiyooCFW out of the gate.
+Downstream fork of [mattsteen14/rascraper](https://github.com/mattsteen14/rascraper) tailored to work with MiyooCFW out of the gate for scraping ROM's artwork.
 
 ## About The Project
 
@@ -18,27 +18,9 @@ This tool is intended as an alternative to using built-in scraper in MiyooCFW, f
 - Works offline once downloaded
 - Two flexible output options
 
-
-## Getting Started
+## Development
 
 These instructions will help you set up the project locally.
-
-### Prerequisites
-
-- An internet connection (to download artwork from GitHub)
-- ROMs organized in subdirectories (with filenames that match libretro-thumbnails)
-- Knowledge of your system’s MIYOO name and libretro-thumbnails directory name
-
-Make sure Python and Pillow are installed:
-
-```bash
-python3 --version
-pip install pillow
-```
-
----
-
-### Installation
 
  - Install dependencies:
 
@@ -51,6 +33,18 @@ pip install -r requirements.txt
 ```bash
 python3 rascraper.py
 ```
+
+## Getting Started
+
+### Prerequisites
+
+- An internet connection (to download artwork from GitHub)
+- ROMs organized in subdirectories (with filenames that match libretro-thumbnails)
+- Knowledge of your system’s MIYOO name and libretro-thumbnails directory name
+
+### Quick Start
+
+ - run `rascraper` executable
 
  - Select your **ROMs directory** using the first Browse button.
 
@@ -65,5 +59,3 @@ python3 rascraper.py
     NOTE: If you want to copy ROMs and scraped images simultaneously from one place to your device, save artwork "Within root ROMS folder" & you can leave blank "MIYOO Root folder".
 
  - Click **RUN SCRAPER**.
-
- - Check the subdirectories — artwork should be downloaded and placed correctly.
