@@ -500,7 +500,7 @@ def get_rom_files(roms_folder, extensions):
     return roms
 
 # --- SCRAPER LOGIC ---
-def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_callback=None, miyoo_root=None):
+def run_scraper(roms_folder, system_key, output_mode, scraper_mode, resize_mode, progress_callback=None, miyoo_root=None):
     libretro_folder = systems[system_key]["libretro"]
     miyoo_folder = systems[system_key]["miyoo"]
     commit = get_latest_commit_hash(libretro_folder)
@@ -546,11 +546,14 @@ def run_scraper(roms_folder, system_key, output_mode, scraper_mode, progress_cal
                             libretro_folder, "Named_Boxarts", fallback_name, commit
                         )        
                 if boxart_bytes:
-                    resized = resize_image(boxart_bytes)
-                    if resized:
-                        save_image(resized, boxart_path)
+                    if resize_mode:
+                        resized = resize_image(boxart_bytes)
+                        if resized:
+                            save_image(resized, boxart_path)
+                        else:
+                            failed.append(f"{rom_name} (Boxart - Resize Error)")
                     else:
-                        failed.append(f"{rom_name} (Boxart - Resize Error)")
+                        save_image(boxart_bytes, boxart_path)
                 else:
                     failed.append(f"{rom_name} (Boxart)")
             else:
@@ -622,6 +625,7 @@ class RAScraperGUI:
         self.selected_system = tk.StringVar()
         self.output_option = tk.StringVar(value="miyoo")
         self.scraper_option = tk.StringVar(value="boxarts")
+        self.resize_option = tk.BooleanVar(value=True)
         self.progress = tk.IntVar(value=0)
         self.progress_text = tk.StringVar(value="")
         
@@ -660,6 +664,12 @@ class RAScraperGUI:
         tk.Radiobutton(output_frame, text="Screenshots", variable=self.scraper_option, value="screenshots").pack(anchor="w")
         tk.Radiobutton(output_frame, text="Titles", variable=self.scraper_option, value="titles").pack(anchor="w")
 
+        tk.Label(root, text="Should images be resized?").pack(anchor="w", padx=10, pady=(10,0))
+        output_frame = tk.Frame(root)
+        output_frame.pack(fill="x", padx=20)
+        tk.Radiobutton(output_frame, text="YES, downscaled to aspect width=128px", variable=self.resize_option, value=True).pack(anchor="w")
+        tk.Radiobutton(output_frame, text="NO, original size", variable=self.resize_option, value=False).pack(anchor="w")
+
         # Progress bar and label
         self.progress_bar = ttk.Progressbar(root, maximum=100, variable=self.progress)
         self.progress_bar.pack(fill="x", padx=10, pady=(15,5))
@@ -690,6 +700,7 @@ class RAScraperGUI:
         system_key = self.selected_system.get()
         output_mode = self.output_option.get()
         scraper_mode = self.scraper_option.get()
+        resize_mode = self.resize_option.get()
         
         if not roms_folder:
             messagebox.showwarning("Missing input", "Please select a ROMs folder.")
@@ -705,7 +716,7 @@ class RAScraperGUI:
         
         def task():
             try:
-                failed, skipped = run_scraper(roms_folder, system_key, output_mode, scraper_mode, self.update_progress, miyoo_root)
+                failed, skipped = run_scraper(roms_folder, system_key, output_mode, scraper_mode, resize_mode, self.update_progress, miyoo_root)
                 self.progress_text.set("Done!")
                 message = "Scraping complete!\n"
                 if skipped:
