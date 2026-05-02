@@ -36,11 +36,10 @@ python3 rascraper.py
 
 - Build standalone:
 
-  Requires `pyinstaller` module
+  Requires `pyinstaller` module (output in: dist/rascraper${EXE})
 ```bash
-python3 -m PyInstaller --onefile --noconsole rascraper.py
+python3 -m PyInstaller --onefile --noconsole --icon=rascraper.ico rascraper.py
 ```
-
 ## Getting Started
 
 ### Prerequisites
