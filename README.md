@@ -34,6 +34,13 @@ pip install -r requirements.txt
 python3 rascraper.py
 ```
 
+- Build standalone:
+
+  Requires `pyinstaller` module
+```bash
+python3 -m PyInstaller --onefile --noconsole rascraper.py
+```
+
 ## Getting Started
 
 ### Prerequisites
