@@ -33,10 +33,6 @@ systems = {
         "libretro": "Arduboy_Inc_-_Arduboy",
         "miyoo": "ARDUBOY"
     },
-    "Atari 8-bit": {
-        "libretro": "Atari_-_8-bit_Family",
-        "miyoo": "800" # The systemid in RA suggest atari_5200, but it's atari800 core so let's use that
-    },
     "Atari 2600": {
         "libretro": "Atari_-_2600",
         "miyoo": "2600" # Would rather use smth like ATARI_2600,  but this isn't inline with legacy docs
@@ -48,6 +44,10 @@ systems = {
     "Atari 7800": {
         "libretro": "Atari_-_7800",
         "miyoo": "7800"
+    },
+    "Atari 8-bit": {
+        "libretro": "Atari_-_8-bit_Family",
+        "miyoo": "800" # The systemid in RA suggest atari_5200, but it's atari800 core so let's use that
     },
     # "Atari Jaguar": {
     #     "libretro": "Atari_-_Jaguar",
@@ -77,6 +77,10 @@ systems = {
     #     "libretro": "",
     #     "miyoo": "CHIP_8"
     # },
+    # "Cannonball": {
+    #     "libretro": "Cannonball",
+    #     "miyoo": "CANNONBALL"
+    # },
     "Casio Loopy": {
         "libretro": "Casio_-_Loopy",
         "miyoo": "MSX"
@@ -90,10 +94,6 @@ systems = {
         "libretro": "ChaiLove",
         "miyoo": "CHAILOVE"
     },
-    # "Cannonball": {
-    #     "libretro": "Cannonball",
-    #     "miyoo": "CANNONBALL"
-    # },
     "ColecoVision": {
         "libretro": "Coleco_-_ColecoVision",
         "miyoo": "COLECOVISION"
@@ -140,23 +140,11 @@ systems = {
         "libretro": "GCE_-_Vectrex",
         "miyoo": "VECTREX"
     },
+    #GamePark - GP32
     "Game and Watch": {
         "libretro": "Handheld_Electronic_Game",
         "miyoo": "G&W"
     },
-    "Game Boy": {
-        "libretro": "Nintendo_-_Game_Boy",
-        "miyoo": "GB"
-    },
-    "Game Boy Color": {
-        "libretro": "Nintendo_-_Game_Boy_Color",
-        "miyoo": "GB" # This is inline with wiki, so the same dir for GB & GBC, since similar emulators are used
-    },
-    "Game Boy Advance": {
-        "libretro": "Nintendo_-_Game_Boy_Advance",
-        "miyoo": "GBA"
-    },
-    #GamePark - GP32
     #Hartung - Game Master
     #LeapFrog - Leapster Learning Game System
     "Jump 'n Bump": {
@@ -210,7 +198,19 @@ systems = {
     },
     #NEC - PC-98
     #NEC - PC-FX
-    "Nintendo": {
+    "Nintendo Game Boy": {
+        "libretro": "Nintendo_-_Game_Boy",
+        "miyoo": "GB"
+    },
+    "Nintendo Game Boy Color": {
+        "libretro": "Nintendo_-_Game_Boy_Color",
+        "miyoo": "GB" # This is inline with wiki, so the same dir for GB & GBC, since similar emulators are used
+    },
+    "Nintendo Game Boy Advance": {
+        "libretro": "Nintendo_-_Game_Boy_Advance",
+        "miyoo": "GBA"
+    },
+    "Nintendo Entertainment System": {
         "libretro": "Nintendo_-_Nintendo_Entertainment_System",
         "miyoo": "NES"
     },
